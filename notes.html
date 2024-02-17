@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+</head>
+<body>
+    <nav>
+        <button onclick="handleHome()">Home</button>
+    </nav>
+    <h2>Notes</h2>
+    <p>Notes are in console</p>
+    <button onclick="handlenote()">Add a new note</button>
+</body>
+</html>
+<script>
+    const getNotes=()=>{
+        fetch("https://sore-erin-lemming-wrap.cyclic.app/notes", {
+            // method: "GET",
+            headers:{
+                "Content-type":"application/json",
+                authorization:`Bearer ${localStorage.getItem("token")}`      
+            }
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err)); 
+    }
+
+    const handlenote=()=>{
+        window.location.href="addnote.html"
+    }
+    const handleHome = () => {
+        window.location.href="index.html"
+    }
+
+    getNotes()
+
+</script>
